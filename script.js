@@ -21,10 +21,10 @@ var city = [];
 
 
       // The following function renders items in a todo list as <li> elements
-function renderCity() {
+function renderWeather() {
   
 
-  cityList.innerHTML ="";
+  // cityList.innerHTML ="";
 
   for (let i = 0; i < city.length; i++) {
     
