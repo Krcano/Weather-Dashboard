@@ -2,6 +2,16 @@ header{
     background: linear-gradient(to right, rgb(49, 97, 180), blue, rgb(43, 50, 116));
     color: white;
     text-align: center;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
+}
+.cityInput{
+    border-color: lightpink;
+background-color: transparent;
+}
+.citySearch{
+    background-color: lightpink;
+    border-radius: 10px;
+}
+.searchContainer{
+    margin: 5rem;
 }
