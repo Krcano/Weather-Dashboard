@@ -5,22 +5,33 @@ var searchButton = document.querySelector(".citySearch")
 var cityInput = document.querySelector(".cityInput")
 var city = JSON.parse(localStorage.getItem("City")) || [];
 var apiKey = "7d043b86e402170a14fc88e1c3d5ed2a"
+var currentWeatherContainer = document.querySelector(".currentWeatherContainer")
+var forecastContainer = document.querySelector(".forecastContainer")
+// used for my current weather function v
 var currentCityName = "";
 var currentCityTemp = "";
 var currentCityWind = "";
 var currentCityHumidity ="";
 var currentCityUV = "";
-// var currentCityIcon = ""
-var currentWeatherContainer = document.querySelector(".currentWeatherContainer")
-var forecastContainer = document.querySelector(".forecastContainer")
+
+var currentCityIcon = ""
+// used for my current weather function ^
 
 
 
 
 
 //  basic set up need to input own variables
-function getApi(){
-  var requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput.value +"&units=imperial&appid=7d043b86e402170a14fc88e1c3d5ed2a";
+function getApi(event){
+  var requestUrl
+  console.log(event)
+  if (typeof event === "undefined" ) {
+    requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput.value +"&units=imperial&appid=" + apiKey;
+  }else{
+    requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + event.target.innerText +"&units=imperial&appid=" + apiKey
+  }
+   
+  
 fetch(requestUrl)
       .then(function (response) {
         // console.log(response)
@@ -29,12 +40,15 @@ fetch(requestUrl)
         
       })
       .then(function(data){
+        currentWeatherContainer.innerHTML= ""
+        forecastContainer.innerHTML=""
         currentCityName=data.name
         currentCityTemp = data.main.temp
         currentCityWind= data.wind.speed
         currentCityHumidity = data.main.humidity
         currentCityUV = data.uvi
-        currentCityIcon = data.icon
+        var currentCityIconId = data.weather[0].icon
+        currentCityIcon = "http://openweathermap.org/img/w/" + currentCityIconId +".png"
         console.log(data)
         let lat = data.coord.lat
         let lon = data.coord.lon
@@ -57,49 +71,75 @@ function currentWeather(data){
   cityH1.classList="currentWeatherCSS"
   currentWeatherContainer.append(cityH1);
 
-  // var currentIcon = document.createElement("img")
-  // currentIcon.innerText = currentCityIcon
-  // currentWeatherContainer.append(currentIcon)
+
+  var unixTimestamp = data.dt
+      var date = moment.unix(unixTimestamp).format("L");
+      var dayDate = document.createElement("span")
+      dayDate.innerText = date
+      cityH1.append(dayDate)
+      console.log(data)
+
+  var currentIcon = document.createElement("img")
+  currentIcon.src = currentCityIcon
+  currentWeatherContainer.append(currentIcon)
 
   var currentTemp = document.createElement("p");
-  currentTemp.innerText ="Temp: " + currentCityTemp + " degrees Farenheit";
-  // currentTemp.classList="<put css class name>"
+  currentTemp.innerText ="Temp: " + currentCityTemp + " \xB0F";
+  currentTemp.classList="currentWeatherCSS"
   currentWeatherContainer.append(currentTemp)
 
-// DOESNT WORK
   var currentWind = document.createElement("p")
   currentWind.innerText = "Wind: "+ currentCityWind + "MPH";
-  // currentWind.classList="<put css class name>"
+  currentWind.classList="currentWeatherCSS"
   currentWeatherContainer.append(currentWind);
 
   var currentHumidity = document.createElement("p");
   currentHumidity.innerText = "Humidity: " + currentCityHumidity + " %";
-  // currentTemp.classList="<put css class name>"
+  currentTemp.classList="currentWeatherCSS"
   currentWeatherContainer.append(currentHumidity)
 
   var currentUVIndex = document.createElement("p");
   currentUVIndex.innerText = "UV Index: " + currentCityUV;
-  // currentTemp.classList="<put css class name>"
+  currentTemp.classList="currentWeatherCSS"
   currentWeatherContainer.append(currentUVIndex)
 
   
 }
 // five day forecast
 function forecastWeather(data){
+ 
   var forecastData = data.daily
-  forecastData = forecastData.slice(0, 5)
+  forecastData = forecastData.slice(1, 6)
   forecastData.forEach((day)=>{
-    var weatherCard = document.createElement("div")
-    var tempP = document.createElement("p")
-    tempP.innerText=`Day Temperature: ${day.temp.day}`
 
+    var weatherCard = document.createElement("div")
+      // converting unix code to date format
+      var unixTimestamp = day.dt
+      var date = moment.unix(unixTimestamp).format("L");
+      var dayDate = document.createElement("h4")
+      dayDate.innerText = date
+      weatherCard.append(dayDate)
+    // creates card elements
+    var tempP = document.createElement("p")
+    tempP.innerText=`Temp: ${day.temp.day} \xB0F `
     weatherCard.append(tempP)
 
+    var image = document.createElement("img")
+    image.src = currentCityIcon
+    weatherCard.append(image)
 
 
+    var windP = document.createElement("p")
+    windP.innerText=`Wind: ${day.wind_speed} MPH`
+    weatherCard.append(windP)
+
+    var humidityP = document.createElement("p")
+    humidityP.innerText = `Humidity: ${day.humidity} %`
+    weatherCard.append(humidityP)
+
+    
     weatherCard.classList= "forecastCard"
     forecastContainer.append(weatherCard)
-
   })
   
 }
@@ -113,9 +153,11 @@ function forecastWeather(data){
 function listCity() {
   cityListContainer.innerHTML ="";
   city.forEach((city)=>{
-    var li = document.createElement('li');
+    var li = document.createElement('button');
     li.textContent = city
+    li.classList= "cityButt"
     cityListContainer.appendChild(li)
+    li.addEventListener("click", getApi)
   })
  
 }
@@ -138,8 +180,10 @@ searchButton.addEventListener("click", function(event){
   event.preventDefault()
   getApi();
   savedCity();
+  listCity();
   
 
 });
-
 listCity();
+
+

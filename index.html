@@ -2,7 +2,7 @@
 <html>
   <head>
     <!--Import Google Icon Font-->
-   
+    
     <link rel= "stylesheet" href="./style.css">
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -13,24 +13,25 @@
       <header>
         <h1>Weather Dashboard</h1>
       </header>
+      <div class="mainContainer">
         <aside class="searchContainer">
           <h1>Search for a City: </h1>
-          <input type="text" class="cityInput" placeholder="City, State">
+          <input type="text" class="cityInput" placeholder="City">
           <button class="citySearch">Search</button>
           <hr>
           <ul class="cityListContainer"></ul>
         </aside>
-        
+      <div class="weatherContainer">
        <div class="currentWeatherContainer"></div>
 
        <h1>5 Day Forecast: </h1>
         <div class="forecastContainer"></div>
-
-
+        </div>
+      </div>
 
       
 
-    
+      <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
