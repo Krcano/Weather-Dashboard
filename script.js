@@ -3,46 +3,108 @@ var fetchButton = document.getElementById('fetch-button');
 var cityListContainer = document.querySelector(".cityListContainer")
 var searchButton = document.querySelector(".citySearch")
 var cityInput = document.querySelector(".cityInput")
-var city = [];
- 
-// //  basic set up need to input own variables
-//  fetch(requestUrl)
-//       .then(function (response) {
-//         return response.json();
-//       })
-//       .then(function (data) {
-//         for (var i = 0; i < data.length; i++) {
-//           var listItem = document.createElement('li');
-//           listItem.textContent = data[i];
-//           ingredientsList.appendChild(listItem);
-//         }
-//         console.log(response)
-//       });
+var city = JSON.parse(localStorage.getItem("City")) || [];
+var apiKey = "7d043b86e402170a14fc88e1c3d5ed2a"
+var currentCityName = "";
+var currentWeatherContainer = document.querySelector(".currentWeatherContainer")
+var forecastContainer = document.querySelector(".forecastContainer")
 
 
-      // The following function renders items in a todo list as <li> elements
-function renderWeather() {
+
+
+
+//  basic set up need to input own variables
+function getApi(){
+  var requestUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput.value +"&units=imperial&appid=7d043b86e402170a14fc88e1c3d5ed2a";
+fetch(requestUrl)
+      .then(function (response) {
+        // console.log(response)
+        // console.log(response.json());
+        return response.json();
+        
+      })
+      .then(function(data){
+        currentCityName=data.name
+        console.log(data)
+        let lat = data.coord.lat
+        let lon = data.coord.lon
+        let oneCall =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
+        fetch(oneCall)
+        .then(function (response) {
+          return response.json();
+        }) 
+          .then((data)=>{
+            console.log(data);
+            currentWeather(data);
+            forecastWeather(data)
+          })
+        })
+} 
+// top div for current weather
+function currentWeather(data){
+  var cityH1 = document.createElement("h1");
+  cityH1.innerText = currentCityName;
+  cityH1.classList="weatherH1"
+  currentWeatherContainer.append(cityH1);
+
   
+}
+// five day forecast
+function forecastWeather(data){
+  var forecastData = data.daily
+  forecastData = forecastData.slice(0, 5)
+  forecastData.forEach((day)=>{
+    var weatherCard = document.createElement("div")
+    var tempP = document.createElement("p")
+    tempP.innerText=`Day Temperature: ${day.temp.day}`
 
-  // cityList.innerHTML ="";
+    weatherCard.append(tempP)
 
-  for (let i = 0; i < city.length; i++) {
-    
-    var cityList= city[i]
-    
-    var li = document.createElement('li');
-    li.textContent = cityList
-    
-    cityListContainer.appendChild(li);
-    
+
+
+    weatherCard.classList= "forecastCard"
+    forecastContainer.append(weatherCard)
+
+  })
+  
 }
 
- }
+
+
+
+
+
+  // Prints out the cities in a list  
+function listCity() {
+  cityListContainer.innerHTML ="";
+  city.forEach((city)=>{
+    var li = document.createElement('li');
+    li.textContent = city
+    cityListContainer.appendChild(li)
+  })
  
-searchButton.addEventListener("click", function(){
-  var cityText = cityInput.value;
-  city.push(cityText);
-  cityInput.value = " ";
-  renderWeather();
-});
+}
+
+// saves to local storage is taken over by my event listener
+function savedCity(){
+    var cityName = cityInput.value;
+    console.log(cityName)
+    city.push(cityName)
+    cityInput.value = " ";
+  localStorage.setItem("City", JSON.stringify(city))
+   
+   }
+
+
+
+
+// event listeners
+searchButton.addEventListener("click", function(event){
+  event.preventDefault()
+  getApi();
+  savedCity();
   
+
+});
+
+listCity();
