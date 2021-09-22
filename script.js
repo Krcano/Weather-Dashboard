@@ -6,6 +6,11 @@ var cityInput = document.querySelector(".cityInput")
 var city = JSON.parse(localStorage.getItem("City")) || [];
 var apiKey = "7d043b86e402170a14fc88e1c3d5ed2a"
 var currentCityName = "";
+var currentCityTemp = "";
+var currentCityWind = "";
+var currentCityHumidity ="";
+var currentCityUV = "";
+// var currentCityIcon = ""
 var currentWeatherContainer = document.querySelector(".currentWeatherContainer")
 var forecastContainer = document.querySelector(".forecastContainer")
 
@@ -25,6 +30,11 @@ fetch(requestUrl)
       })
       .then(function(data){
         currentCityName=data.name
+        currentCityTemp = data.main.temp
+        currentCityWind= data.wind.speed
+        currentCityHumidity = data.main.humidity
+        currentCityUV = data.uvi
+        currentCityIcon = data.icon
         console.log(data)
         let lat = data.coord.lat
         let lon = data.coord.lon
@@ -44,8 +54,33 @@ fetch(requestUrl)
 function currentWeather(data){
   var cityH1 = document.createElement("h1");
   cityH1.innerText = currentCityName;
-  cityH1.classList="weatherH1"
+  cityH1.classList="currentWeatherCSS"
   currentWeatherContainer.append(cityH1);
+
+  // var currentIcon = document.createElement("img")
+  // currentIcon.innerText = currentCityIcon
+  // currentWeatherContainer.append(currentIcon)
+
+  var currentTemp = document.createElement("p");
+  currentTemp.innerText ="Temp: " + currentCityTemp + " degrees Farenheit";
+  // currentTemp.classList="<put css class name>"
+  currentWeatherContainer.append(currentTemp)
+
+// DOESNT WORK
+  var currentWind = document.createElement("p")
+  currentWind.innerText = "Wind: "+ currentCityWind + "MPH";
+  // currentWind.classList="<put css class name>"
+  currentWeatherContainer.append(currentWind);
+
+  var currentHumidity = document.createElement("p");
+  currentHumidity.innerText = "Humidity: " + currentCityHumidity + " %";
+  // currentTemp.classList="<put css class name>"
+  currentWeatherContainer.append(currentHumidity)
+
+  var currentUVIndex = document.createElement("p");
+  currentUVIndex.innerText = "UV Index: " + currentCityUV;
+  // currentTemp.classList="<put css class name>"
+  currentWeatherContainer.append(currentUVIndex)
 
   
 }

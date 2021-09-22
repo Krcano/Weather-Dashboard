@@ -6,7 +6,7 @@ header{
 }
 .cityInput{
     border-color: lightpink;
-background-color: transparent;
+    background-color: transparent;
 }
 .citySearch{
     background-color: lightpink;
@@ -23,17 +23,17 @@ background-color: transparent;
     height: 25rem;
     
 }
-.weatherH1{
-    color:pink;
+.currentWeatherCSS{
+    color:darkblue;
+    padding: 2px;
 }
 /* css for individual cards */
 .forecastCard{
     background-color: cornflowerblue;
     width:200px;
     height:200px;
-    border: 3px solid cornflowerblue;
+    border: 3px solid darkblue;
     border-radius: 5px;
-    box-shadow:  3px 6px black;
     
 }
 /* spaces out cards */
@@ -41,6 +41,7 @@ background-color: transparent;
     display: flex;
     justify-content: space-evenly;
 }
+/* TO DO: change list items to city butt */
 .cityButt{
     background-color: lightpink;
     border-radius: 10px;
