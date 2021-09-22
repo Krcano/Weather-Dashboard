@@ -40,6 +40,7 @@ fetch(requestUrl)
         
       })
       .then(function(data){
+      // grabbing Api info
         currentWeatherContainer.innerHTML= ""
         forecastContainer.innerHTML=""
         currentCityName=data.name
@@ -49,7 +50,10 @@ fetch(requestUrl)
         currentCityUV = data.uvi
         var currentCityIconId = data.weather[0].icon
         currentCityIcon = "http://openweathermap.org/img/w/" + currentCityIconId +".png"
+        currentWeather(data);
         console.log(data)
+
+        // function with the one call variable url for forecast weather
         let lat = data.coord.lat
         let lon = data.coord.lon
         let oneCall =`https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=imperial`
@@ -59,29 +63,29 @@ fetch(requestUrl)
         }) 
           .then((data)=>{
             console.log(data);
-            currentWeather(data);
             forecastWeather(data)
+
           })
         })
 } 
 // top div for current weather
 function currentWeather(data){
   var cityH1 = document.createElement("h1");
-  cityH1.innerText = currentCityName;
+  cityH1.innerText = currentCityName + " "  ;
   cityH1.classList="currentWeatherCSS"
   currentWeatherContainer.append(cityH1);
 
 
   var unixTimestamp = data.dt
-      var date = moment.unix(unixTimestamp).format("L");
-      var dayDate = document.createElement("span")
-      dayDate.innerText = date
-      cityH1.append(dayDate)
-      console.log(data)
+  var date = moment.unix(unixTimestamp).format("L");
+  var dayDate = document.createElement("span")
+  dayDate.innerText = date
+  cityH1.append(dayDate)
+  console.log(data)
 
   var currentIcon = document.createElement("img")
-  currentIcon.src = currentCityIcon
-  currentWeatherContainer.append(currentIcon)
+  currentIcon.src =  " " + currentCityIcon
+  cityH1.append(currentIcon)
 
   var currentTemp = document.createElement("p");
   currentTemp.innerText ="Temp: " + currentCityTemp + " \xB0F";
@@ -97,21 +101,26 @@ function currentWeather(data){
   currentHumidity.innerText = "Humidity: " + currentCityHumidity + " %";
   currentTemp.classList="currentWeatherCSS"
   currentWeatherContainer.append(currentHumidity)
-
-  var currentUVIndex = document.createElement("p");
-  currentUVIndex.innerText = "UV Index: " + currentCityUV;
-  currentTemp.classList="currentWeatherCSS"
-  currentWeatherContainer.append(currentUVIndex)
-
-  
 }
 // five day forecast
 function forecastWeather(data){
  
   var forecastData = data.daily
   forecastData = forecastData.slice(1, 6)
-  forecastData.forEach((day)=>{
+  // uv index
+  var currentUVIndex = document.createElement("button");
+  currentUVIndex.disabled = true
+  currentUVIndex.classList="currentWeatherCSS"
+  currentWeatherContainer.append(currentUVIndex)
+  currentUVIndex.innerText =  "UV Index: " + data.current.uvi
+  var uvIndex = data.current.uvi
+ 
+  // if(uvIndex >=7 ){
+  //   currentUVIndex.style.backgroundColor= "orange"
+  // }
 
+
+  forecastData.forEach((day)=>{
     var weatherCard = document.createElement("div")
       // converting unix code to date format
       var unixTimestamp = day.dt
@@ -119,6 +128,7 @@ function forecastWeather(data){
       var dayDate = document.createElement("h4")
       dayDate.innerText = date
       weatherCard.append(dayDate)
+
     // creates card elements
     var tempP = document.createElement("p")
     tempP.innerText=`Temp: ${day.temp.day} \xB0F `
@@ -138,6 +148,7 @@ function forecastWeather(data){
     weatherCard.append(humidityP)
 
     
+
     weatherCard.classList= "forecastCard"
     forecastContainer.append(weatherCard)
   })
