@@ -115,10 +115,15 @@ function forecastWeather(data){
   currentUVIndex.innerText =  "UV Index: " + data.current.uvi
   var uvIndex = data.current.uvi
  
-  // if(uvIndex >=7 ){
-  //   currentUVIndex.style.backgroundColor= "orange"
+  // if(uvIndex <=2){
+  //   currentUVIndex.classList("low")
+  // } else if(uvIndex =3 && uvIndex <=5){
+  //   currentUVIndex.classList("moderate")
+  // }else if(uvIndex =6 && uvIndex <=7){
+  //   currentUVIndex.classList("high")
+  // }else if(uvIndex =8  && uvIndex >=10){
+  //   currentUVIndex.classList("veryHigh")
   // }
-
 
   forecastData.forEach((day)=>{
     var weatherCard = document.createElement("div")
@@ -129,15 +134,14 @@ function forecastWeather(data){
       dayDate.innerText = date
       weatherCard.append(dayDate)
 
-    // creates card elements
-    var tempP = document.createElement("p")
-    tempP.innerText=`Temp: ${day.temp.day} \xB0F `
-    weatherCard.append(tempP)
-
+// creates card elements
     var image = document.createElement("img")
     image.src = currentCityIcon
     weatherCard.append(image)
 
+    var tempP = document.createElement("p")
+    tempP.innerText=`Temp: ${day.temp.day} \xB0F `
+    weatherCard.append(tempP)
 
     var windP = document.createElement("p")
     windP.innerText=`Wind: ${day.wind_speed} MPH`

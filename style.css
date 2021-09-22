@@ -26,7 +26,7 @@ header{
     height: 20rem;
     color:darkblue;
     font-size: 1rem;
-   
+   color:ligh
 }
 .weatherContainer{
     width:75%;
@@ -60,6 +60,16 @@ header{
 .cityButt{
     background-color: lightpink;
     border-radius: 10px;
-    
-    
+}
+.low{
+    background-color: lightgreen;
+}
+.moderate{
+    background-color: yellow;
+}
+.high{
+    background-color: lightsalmon;
+}
+.veryHigh{
+    background-color: lightcoral;
 }
