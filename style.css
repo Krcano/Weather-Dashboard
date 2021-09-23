@@ -21,26 +21,23 @@ header{
     width:25%;
 }
 .currentWeatherContainer{
-    border: 1px black solid;
-    width: 100%;
+    border: 3px black solid;
+    width: 95%;
     height: 20rem;
     color:darkblue;
-    font-size: 1rem;
-   color:ligh
+    font-size: 1.5rem;
+    padding-left: 20px;
 }
 .weatherContainer{
-    width:75%;
+    width: 75%;
 }
 .currentWeatherCSS{
     color:rgb(43, 50, 116);
     padding-left: 2px;
-    
-
-    
 }
 /* css for individual cards */
 .forecastCard{
-    background-color: cornflowerblue;
+    background: linear-gradient(to bottom, cornflowerblue, rgb(163, 183, 219));
     width:200px;
     height:250px;
     border: 3px solid darkblue;
@@ -48,19 +45,18 @@ header{
     /* padding: 3px; */
     text-align: center;
     color: white;
-    
-    
 }
 /* spaces out cards */
 .forecastContainer{
     display: flex;
     justify-content: space-evenly;
 }
-/* TO DO: change list items to city butt */
 .cityButt{
     background-color: lightpink;
     border-radius: 10px;
 }
+
+/* for the uv index if statement */
 .low{
     background-color: lightgreen;
 }
