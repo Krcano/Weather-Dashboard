@@ -4,21 +4,36 @@ header{
     text-align: center;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
 }
+body{
+    background: linear-gradient(to right, rgba(173, 170, 170, 0.452), rgba(189, 189, 192, 0.281)), url("https://wallpapercave.com/wp/0krLHVq.jpg");
+    
+    color: white;
+}
 .cityInput{
-    border-color: lightpink;
-    background-color: transparent;
+    border-color: lightsalmon;
+    background-color: white;
 }
 .citySearch{
     margin-top: 5px;
-    background-color: lightpink;
+    background-color: lightsalmon;
     border-radius: 10px;
 }
 .mainContainer{
     display: flex;
+    /* background-color:rgb(220, 229, 248) ; */
 }
 .searchContainer{
     margin: 3rem;
     width:25%;
+}
+.cityListContainer{
+    width:50%;
+}
+.cityButt{
+    background-color: lightsalmon;
+    border-radius: 10px;
+    padding: 5px;
+    
 }
 .currentWeatherContainer{
     border: 3px black solid;
@@ -27,6 +42,7 @@ header{
     color:darkblue;
     font-size: 1.5rem;
     padding-left: 20px;
+    background: linear-gradient(to bottom, cornflowerblue, rgb(200, 216, 247));
 }
 .weatherContainer{
     width: 75%;
@@ -51,10 +67,7 @@ header{
     display: flex;
     justify-content: space-evenly;
 }
-.cityButt{
-    background-color: lightpink;
-    border-radius: 10px;
-}
+
 
 /* for the uv index if statement */
 .low{
@@ -69,3 +82,4 @@ header{
 .veryHigh{
     background-color: lightcoral;
 }
+
