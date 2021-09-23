@@ -111,6 +111,7 @@ function forecastWeather(data){
   currentUVIndex.innerText =  "UV Index: " + data.current.uvi
   var uvIndex = data.current.uvi
   
+  // adjusts color of uv index background
   if(uvIndex <=2){
     currentUVIndex.classList.add("low")
   } else if(uvIndex <=5 ){
@@ -121,41 +122,41 @@ function forecastWeather(data){
     currentUVIndex.classList.add("high")
   } console.log(currentUVIndex.classList)
 
-  forecastData.forEach((day)=>{
-    var weatherCard = document.createElement("div")
-     // converting unix code to date format
-    var unixTimestamp = day.dt
-    var date = moment.unix(unixTimestamp).format("L");
-    var dayDate = document.createElement("h4")
-    dayDate.innerText = date
-    weatherCard.append(dayDate)
-
+// for each function to create forecast elements and append it to weathercard
+forecastData.forEach(function (day){
+  var weatherCard = document.createElement("div")
+   // converting unix code to date format
+  var unixTimestamp = day.dt
+  var date = moment.unix(unixTimestamp).format("L");
+  var dayDate = document.createElement("h4")
+  dayDate.innerText = date
+  weatherCard.append(dayDate)
 // creates card elements
-    var image = document.createElement("img")
-    image.src = currentCityIcon
-    weatherCard.append(image)
+  var image = document.createElement("img")
+  image.src = currentCityIcon
+  weatherCard.append(image)
 
-    var tempP = document.createElement("p")
-    tempP.innerText=`Temp: ${day.temp.day} \xB0F `
-    weatherCard.append(tempP)
+  var tempP = document.createElement("p")
+  tempP.innerText=`Temp: ${day.temp.day} \xB0F `
+  weatherCard.append(tempP)
 
-    var windP = document.createElement("p")
-    windP.innerText=`Wind: ${day.wind_speed} MPH`
-    weatherCard.append(windP)
+  var windP = document.createElement("p")
+  windP.innerText=`Wind: ${day.wind_speed} MPH`
+  weatherCard.append(windP)
 
-    var humidityP = document.createElement("p")
-    humidityP.innerText = `Humidity: ${day.humidity} %`
-    weatherCard.append(humidityP)
+  var humidityP = document.createElement("p")
+  humidityP.innerText = `Humidity: ${day.humidity} %`
+  weatherCard.append(humidityP)
 
-    weatherCard.classList= "forecastCard"
-    forecastContainer.append(weatherCard)
+  weatherCard.classList= "forecastCard"
+  forecastContainer.append(weatherCard)
   })
 }
 
   // Prints out the cities in a list  
 function listCity() {
   cityListContainer.innerHTML ="";
-  city.forEach((city)=>{
+  city.forEach(function(city){
     var li = document.createElement('button');
     li.textContent = city
     li.classList= "cityButt"
@@ -171,7 +172,6 @@ function savedCity(){
     city.push(cityName)
     cityInput.value = " ";
   localStorage.setItem("City", JSON.stringify(city))
-   
    }
 
 // event listeners
@@ -183,5 +183,3 @@ searchButton.addEventListener("click", function(event){
 });
 
 listCity();
-
-

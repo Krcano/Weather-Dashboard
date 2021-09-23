@@ -36,7 +36,7 @@ body{
     
 }
 .currentWeatherContainer{
-    border: 5px darkblue solid;
+    border: 3px darkblue solid;
     width: 95%;
     height: 18rem;
     color:darkblue;
@@ -68,7 +68,6 @@ body{
     justify-content: space-evenly;
 }
 
-
 /* for the uv index if statement */
 .low{
     background-color: lightgreen;
@@ -82,4 +81,3 @@ body{
 .veryHigh{
     background-color: lightcoral;
 }
-
