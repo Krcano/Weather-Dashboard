@@ -1,5 +1,5 @@
 header{
-    background: linear-gradient(to right, rgb(49, 97, 180), blue, rgb(43, 50, 116));
+    /* background-color: cornflowerblue; */
     color: white;
     text-align: center;
     font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
@@ -36,11 +36,11 @@ body{
     
 }
 .currentWeatherContainer{
-    border: 3px black solid;
+    border: 5px darkblue solid;
     width: 95%;
-    height: 20rem;
+    height: 18rem;
     color:darkblue;
-    font-size: 1.5rem;
+    font-size: 1rem;
     padding-left: 20px;
     background: linear-gradient(to bottom, cornflowerblue, rgb(200, 216, 247));
 }
