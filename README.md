@@ -5,6 +5,8 @@ This project is weather dashboard that allows you to see the weather of any city
 
 This project was very challenging and there was a lot of moving parts. For example I had to go to moment.js and format the date information taken from the weather api becuase it was in unix timecode which is unreadable to a user but using moment().unix().format converted it into a legible date.Then i had a lot of trouble extracting the exact information i wanted from the api and formating it on my page because there was more than one api call that needed to be made and  Javascript was used to dynamically create most of the elements on my page however through the use of a foreach loop the elemenets were able to keep going through a loop and creating each element until it got through all the data that was being called. Those were just some of the issues that came along the way but it taught me that I could do so much more with Javascript then I ever thought.
 
+Technologies used: Javascript, OpenWeather(3rd Party Api),Moment.Js, Css, and Html
+
 ## Usage
 To get started type in a city that you would like to find the weather for, then click search. After, the page will load the weather for the current day and the five day forecast. Now if you search up multiple cities and would like to go back to see what the weather again just press the name of the city and the fields will populate with the corresponding city you pressed.
 
