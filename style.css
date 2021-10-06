@@ -1,87 +1,83 @@
-header {
-  /* background-color: cornflowerblue; */
-  color: white;
-  text-align: center;
-  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+header{
+    /* background-color: cornflowerblue; */
+    color: white;
+    text-align: center;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; 
 }
-body {
-  background: linear-gradient(
-      to right,
-      rgba(173, 170, 170, 0.452),
-      rgba(189, 189, 192, 0.281)
-    ),
-    url("https://wallpapercave.com/wp/0krLHVq.jpg");
-  background-repeat: no-repeat;
-  color: white;
+body{
+    background: linear-gradient(to right, rgba(173, 170, 170, 0.288), rgba(189, 189, 192, 0.233)), url("https://wallpapercave.com/wp/0krLHVq.jpg");
+    
+    color: white;
 }
-.cityInput {
-  border-color: lightsalmon;
-  background-color: white;
+.cityInput{
+    border-color: lightsalmon;
+    background-color: white;
 }
-.citySearch {
-  margin-top: 5px;
-  background-color: lightsalmon;
-  border-radius: 10px;
+.citySearch{
+    margin-top: 5px;
+    background-color: lightsalmon;
+    border-radius: 10px;
 }
-.mainContainer {
-  display: flex;
-  /* background-color:rgb(220, 229, 248) ; */
+.mainContainer{
+    display: flex;
+    /* background-color:rgb(220, 229, 248) ; */
 }
-.searchContainer {
-  margin: 3rem;
-  width: 25%;
+.searchContainer{
+    margin: 3rem;
+    width:25%;
 }
-.cityListContainer {
-  width: 50%;
+.cityListContainer{
+    width:50%;
 }
-.cityButt {
-  background-color: lightsalmon;
-  border-radius: 10px;
-  padding: 5px;
+.cityButt{
+    background-color: lightsalmon;
+    border-radius: 10px;
+    padding: 5px;
+    
 }
-.currentWeatherContainer {
-  border: 3px darkblue solid;
-  width: 95%;
-  height: 18rem;
-  color: darkblue;
-  font-size: 1rem;
-  padding-left: 20px;
-  background: linear-gradient(to bottom, cornflowerblue, rgb(200, 216, 247));
+.currentWeatherContainer{
+    border: 3px darkblue solid;
+    width: 95%;
+    height: 18rem;
+    color:darkblue;
+    font-size: 1rem;
+    padding-left: 20px;
+    background: linear-gradient(to bottom, cornflowerblue, rgb(200, 216, 247));
 }
-.weatherContainer {
-  width: 75%;
+.weatherContainer{
+    width: 75%;
 }
-.currentWeatherCSS {
-  color: rgb(43, 50, 116);
-  padding-left: 2px;
+.currentWeatherCSS{
+    color:rgb(43, 50, 116);
+    padding-left: 2px;
 }
 /* css for individual cards */
-.forecastCard {
-  background: linear-gradient(to bottom, cornflowerblue, rgb(163, 183, 219));
-  width: 200px;
-  height: 250px;
-  border: 3px solid darkblue;
-  border-radius: 5px;
-  /* padding: 3px; */
-  text-align: center;
-  color: white;
+.forecastCard{
+    background: linear-gradient(to bottom, cornflowerblue, rgb(163, 183, 219));
+    width:200px;
+    height:250px;
+    border: 3px solid darkblue;
+    border-radius: 5px;
+    /* padding: 3px; */
+    text-align: center;
+    color: white;
 }
 /* spaces out cards */
-.forecastContainer {
-  display: flex;
-  justify-content: space-evenly;
+.forecastContainer{
+    display: flex;
+    justify-content: space-evenly;
 }
 
 /* for the uv index if statement */
-.low {
-  background-color: lightgreen;
+.low{
+    background-color: lightgreen;
 }
-.moderate {
-  background-color: yellow;
+.moderate{
+    background-color: yellow;
 }
-.high {
-  background-color: lightsalmon;
+.high{
+    background-color: lightsalmon;
 }
-.veryHigh {
-  background-color: lightcoral;
+.veryHigh{
+    background-color: lightcoral;
 }
